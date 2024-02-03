@@ -1,0 +1,37 @@
+---
+title: "make_art() function"
+author: "luccapfruender"
+date: "2024-01-26"
+output: html_document
+---
+
+
+```{r Question2}
+# make_art function
+
+make_art <- function(seed = "13216961") { 
+  set.seed(seed) 
+  random_number <- runif(1, min = 10000, max = 100000) 
+  art_df <- data.frame(column1 = rnorm(random_number), column2 = rnorm(random_number), column3 = rnorm(random_number)) 
+  
+  library(tidyverse)
+  library(plotly)
+  
+  colour_random <- rgb(runif(random_number), runif(random_number), runif(random_number)) 
+  
+  plot_ly(data = art_df, x = ~column1, y = ~column2, z = ~column3, type = "scatter3d", mode = "markers", marker = list(opacity = 0.7, color = colour_random)) %>%
+    layout(scene = list(
+      xaxis = list(showgrid = FALSE, zeroline = FALSE, showline = FALSE, showticklabels = FALSE, title = ""),
+      yaxis = list(showgrid = FALSE, zeroline = FALSE, showline = FALSE, showticklabels = FALSE, title = ""),
+      zaxis = list(showgrid = FALSE, zeroline = FALSE, showline = FALSE, showticklabels = FALSE, title = "")
+    )) 
+}
+
+````
+
+```{r Generate make_art() with default}
+make_art()
+```
+```{r Generate make_art() with random seed "123"}
+make_art(123)
+```
